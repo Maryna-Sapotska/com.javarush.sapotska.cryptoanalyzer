@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class FileHandler {
-    public static List<String> readFile(String filePath) {
+    public List<String> readFile(String filePath) {
         List<String> line = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             while (reader.ready()) {
@@ -14,18 +14,19 @@ public class FileHandler {
             }
             return line;
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e);
+            System.out.println("Что-то пошло не так: " + e);
         }
         return line;
     }
 
-    public static List<String> writeFile(String content, String filePath) throws IOException {
-        Validator.validateForWriting(filePath);
+    public List<String> writeFile(String content, String filePath) {
+        Validator validator = new Validator();
+        validator.validateForWriting(filePath);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(content);
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e);
+            System.out.println("Что-то пошло не так: " + e);
         }
         return Collections.singletonList(content);
     }

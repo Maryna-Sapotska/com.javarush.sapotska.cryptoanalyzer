@@ -1,9 +1,7 @@
 package service;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Cipher {
 
@@ -11,9 +9,10 @@ public class Cipher {
             'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
             'ъ', 'ы', 'ь', 'э', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
 
-    public static String encrypt(String path, int shift) throws IOException {
-        List<String> lines = FileHandler.readFile(path);
-        List<String> resultList = new ArrayList<>();
+    public String encrypt(String path, String filePath, int shift) {
+        FileHandler fileHandler = new FileHandler();
+        List<String> lines = fileHandler.readFile(path);
+        ArrayList<String> resultList = new ArrayList<>();
         for (int m = 0; m < lines.size(); m++) {
             StringBuilder encryptList = new StringBuilder();
             String text = lines.get(m);
@@ -26,16 +25,14 @@ public class Cipher {
             }
             resultList.add(encryptList.toString());
         }
-        System.out.println("Укажите путь, куда нужно сохранить файл: ");
-        Scanner console = new Scanner(System.in);
-        String filePath = console.nextLine();
-        FileHandler.writeFile(String.valueOf(resultList), filePath);
+        fileHandler.writeFile(String.valueOf(resultList), filePath);
         return resultList.toString();
     }
 
-    public static String decipher(String encryptedText, int shift) throws IOException {
-        List<String> lines = FileHandler.readFile(encryptedText);
-        List<String> resultList = new ArrayList<>();
+    public String decipher(String encryptedText, String filePath, int shift) {
+        FileHandler fileHandler = new FileHandler();
+        List<String> lines = fileHandler.readFile(encryptedText);
+        ArrayList<String> resultList = new ArrayList<>();
         for (int m = 0; m < lines.size(); m++) {
             StringBuilder encryptList = new StringBuilder();
             String text = lines.get(m);
@@ -48,16 +45,14 @@ public class Cipher {
             }
             resultList.add(encryptList.toString());
         }
-        System.out.println("Укажите путь, куда нужно сохранить файл: ");
-        Scanner console = new Scanner(System.in);
-        String filePath = console.nextLine();
-        FileHandler.writeFile(String.valueOf(resultList), filePath);
+        fileHandler.writeFile(String.valueOf(resultList), filePath);
         return resultList.toString();
     }
 
-    public static String bruteForce(String encryptedText) throws IOException {
-        List<String> lines = FileHandler.readFile(encryptedText);
-        List<String> resultList = new ArrayList<>();
+    public String bruteForce(String encryptedText, String filePath) {
+        FileHandler fileHandler = new FileHandler();
+        List<String> lines = fileHandler.readFile(encryptedText);
+        ArrayList<String> resultList = new ArrayList<>();
         for (int m = 0; m < lines.size(); m++) {
             String text = lines.get(m);
             int shift = ALPHABET.length;
@@ -74,10 +69,7 @@ public class Cipher {
                 resultList.add(encryptList.toString());
             }
         }
-        System.out.println("Укажите путь, куда нужно сохранить файл: ");
-        Scanner console = new Scanner(System.in);
-        String filePath = console.nextLine();
-        FileHandler.writeFile(String.valueOf(resultList), filePath);
+        fileHandler.writeFile(String.valueOf(resultList), filePath);
         return resultList.toString();
     }
 }

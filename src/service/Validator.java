@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 
 public class Validator {
-    public static void validateForWriting(String filePath){
+    public void validateForWriting(String filePath){
         Path path = validatePath(filePath);
         if (Files.exists(path)){
             if (Files.isDirectory(path)){
@@ -16,19 +16,18 @@ public class Validator {
                 System.out.println("Файл " + filePath + " не подходит для записи");
             }
         }
-
     }
 
-    private static Path validatePath(String fileName){
+    private Path validatePath(String fileName){
         try {
             return Path.of(fileName);
         } catch (InvalidPathException e){
             System.out.println("Такого файла не существует");
+            throw new RuntimeException(e);
         }
-        return Path.of(fileName);
     }
 
-    public static void validateForReading(String filePath){
+    public void validateForReading(String filePath){
         Path path = validatePath(filePath);
         if (Files.notExists(path)){
                 System.out.println("Файл " + filePath + " не существует");
