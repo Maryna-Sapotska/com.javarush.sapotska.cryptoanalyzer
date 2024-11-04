@@ -6,6 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        final String PATH_TO_THE_FILE = "Укажите путь к файлу: ";
+        final String PATH_OUT_FILE = "Укажите путь, куда нужно сохранить файл: ";
+        final String KEY = "Укажите ключ: ";
 
         System.out.println("Добро пожаловать! Это шифровальщик!");
         System.out.println("Выберите пункт меню:");
@@ -19,13 +22,13 @@ public class Main {
 
         switch (userChoose) {
             case 1:
-                System.out.println("Укажите путь к файлу: ");
+                System.out.println(PATH_TO_THE_FILE);
                 Scanner scanner = new Scanner(System.in);
                 String text = scanner.nextLine();
-                System.out.println("Укажите путь, куда нужно сохранить файл: ");
+                System.out.println(PATH_OUT_FILE);
                 Scanner console1 = new Scanner(System.in);
                 String filePath = console1.nextLine();
-                System.out.println("Укажите ключ: ");
+                System.out.println(KEY);
                 int key = scanner.nextInt();
                 Validator validator = new Validator();
                 validator.validateForReading(text);
@@ -33,13 +36,13 @@ public class Main {
                 cipher.encrypt(text, filePath, key);
                 break;
             case 2:
-                System.out.println("Укажите путь к файлу: ");
+                System.out.println(PATH_TO_THE_FILE);
                 Scanner scanner1 = new Scanner(System.in);
                 String encryptedText = scanner1.nextLine();
-                System.out.println("Укажите путь, куда нужно сохранить файл: ");
+                System.out.println(PATH_OUT_FILE);
                 Scanner console2 = new Scanner(System.in);
                 String outPath = console2.nextLine();
-                System.out.println("Укажите ключ: ");
+                System.out.println(KEY);
                 int shift = scanner1.nextInt();
                 Validator devalidator = new Validator();
                 devalidator.validateForReading(encryptedText);
@@ -47,10 +50,10 @@ public class Main {
                 decipher.decipher(encryptedText, outPath, shift);
                 break;
             case 3:
-                System.out.println("Укажите путь к файлу: ");
+                System.out.println(PATH_TO_THE_FILE);
                 Scanner scanner2 = new Scanner(System.in);
                 String encryptedTextBF = scanner2.nextLine();
-                System.out.println("Укажите путь, куда нужно сохранить файл: ");
+                System.out.println(PATH_OUT_FILE);
                 Scanner console3 = new Scanner(System.in);
                 String filePathBF = console3.nextLine();
                 Validator validatorBF = new Validator();
