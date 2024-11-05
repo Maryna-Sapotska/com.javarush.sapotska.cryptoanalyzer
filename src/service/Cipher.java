@@ -44,6 +44,7 @@ public class Cipher {
             }
             String result = encryptList.toString();
             fileHandler.writeFile(result, filePath);
+
         }
     }
 

@@ -13,11 +13,9 @@ public class Validator {
                 System.out.println("Файл является директорией");
                 System.out.println("Укажите верный путь к файлу: ");
             }
-
             if (isRestrictedFileType(Path.of(filePath))) {
                 System.out.println("Файл " + filePath + " не подходит для записи");
             }
-
         }
     }
 

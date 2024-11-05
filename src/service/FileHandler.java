@@ -24,7 +24,6 @@ public class FileHandler {
     public List<String> writeFile(String content, String filePath) throws MyExceptions {
         Validator validator = new Validator();
         validator.validateForWriting(filePath);
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(content);
         } catch (IOException e) {
