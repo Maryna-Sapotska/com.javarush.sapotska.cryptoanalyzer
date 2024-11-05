@@ -42,6 +42,7 @@ public class Validator {
 
     public void validateForReading(String filePath) {
         Path path = validatePath(filePath);
+
         if (Files.notExists(path)) {
             System.out.println("Файл " + filePath + " не существует");
         }
