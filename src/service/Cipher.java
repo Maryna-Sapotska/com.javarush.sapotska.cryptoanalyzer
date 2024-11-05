@@ -8,7 +8,7 @@ public class Cipher {
             'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
             'ъ', 'ы', 'ь', 'э', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
 
-    public void encrypt(String path, String filePath, int shift) {
+    public void encrypt(String path, String filePath, int shift) throws MyExceptions {
         FileHandler fileHandler = new FileHandler();
         List<String> lines = fileHandler.readFile(path);
         StringBuilder encryptList = new StringBuilder();
@@ -17,7 +17,10 @@ public class Cipher {
             for (int i = 0; i < text.length(); i++) {
                 for (int j = 0; j < ALPHABET.length; j++) {
                     if (text.charAt(i) == ALPHABET[j]) {
-                        encryptList.append(ALPHABET[(j + shift) % ALPHABET.length]);
+                        try {encryptList.append(ALPHABET[(j + shift) % ALPHABET.length]);}
+                        catch (ArrayIndexOutOfBoundsException e){
+                            System.out.println("Введен неверный ключ");
+                        }
                     }
                 }
             }
@@ -26,7 +29,7 @@ public class Cipher {
         }
     }
 
-    public void decipher(String encryptedText, String filePath, int shift) {
+    public void decipher(String encryptedText, String filePath, int shift) throws MyExceptions {
         FileHandler fileHandler = new FileHandler();
         List<String> lines = fileHandler.readFile(encryptedText);
         StringBuilder encryptList = new StringBuilder();
@@ -44,7 +47,7 @@ public class Cipher {
         }
     }
 
-    public void bruteForce(String encryptedText, String filePath) {
+    public void bruteForce(String encryptedText, String filePath) throws MyExceptions {
         FileHandler fileHandler = new FileHandler();
         List<String> lines = fileHandler.readFile(encryptedText);
         StringBuilder encryptList = new StringBuilder();
